@@ -1,0 +1,43 @@
+"""
+Given a positive integer n. Your task is to generate a string list of all n-bit binary numbers where, for any prefix of the number, there are more or an equal number of 1's than 0's. The numbers should be sorted in decreasing order of magnitude.
+
+"""
+
+
+
+#User function Template for python3
+class Solution:
+    
+    def NBitBinary(self, n):
+        position = 0
+        binary_numbers = [["", 0, 0]]
+        
+        while position < n:
+            new_binary_numbers = []
+            for binary, count_0, len_of_binary in binary_numbers:
+                new_binary_numbers.append([binary + "1", count_0, len_of_binary + 1])
+                if count_0 * 2 < len_of_binary:
+                    new_binary_numbers.append([binary + "0", count_0 + 1, len_of_binary + 1])
+            position += 1
+            binary_numbers = new_binary_numbers[:]
+        
+        return [binary for binary, _, _ in binary_numbers]
+        # code here
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    T=int(input())
+    for i in range(T):
+        n = int(input())
+        ob = Solution()	
+        answer = ob.NBitBinary(n)
+        for value in answer:
+            print(value,end=" ")
+        print()
+
+
+# } Driver Code Ends
